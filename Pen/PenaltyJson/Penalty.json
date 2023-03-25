@@ -1,0 +1,12 @@
+{
+    "penaltyFormID":"",
+    "driverFullName":"",
+    "licenseID":"",
+    "plateNum":"",
+    "degreeOfPenalty":"",
+    "date":"",
+    "time":"",
+    "reason":"",
+    "place":"",
+    "trafficName":""
+}
