@@ -1,4 +1,4 @@
-const {MongoClient} = require('mongodb');
+import {MongoClient} from 'mongodb';
 
 async function main(){
 
@@ -8,12 +8,51 @@ async function main(){
 
     try{
         await client.connect();
-        await createListing(client, {
-            name:"Gishaw Haylu",
-            age:30,
-            from:"CMC",
-            stationedAt:"Bole"
-        });
+        await createMultipleListings(client, [{
+            firstName:"Gishaw",
+            lastName:"Haylu",
+            trafficID:"213678",
+            stationedAt:"Bole",
+            Nationality:"Ethiopian",
+            Sex:"Male",
+            Tel:"0911345678"
+        },
+        {
+            firstName:"Bisrat",
+            lastName:"Yehal",
+            trafficID:"452679",
+            stationedAt:"4-kilo",
+            Nationality:"Ethiopian",
+            Sex:"Male",
+            Tel:"0911225678"
+        },
+        {
+            firstname:"Girma",
+            lastName:"Selah",
+            trafficID:"342678",
+            stationedAt:"Megenagna",
+            Nationality:"Ethiopian",
+            Sex:"Male",
+            Tel:"0930343378"
+        },
+        {
+            firstName:"Werka",
+            lastName:"Geremew",
+            trafficID:"258900",
+            stationedAt:"6-kilo",
+            Nationality:"Ethiopian",
+            Sex:"Male",
+            Tel:"0911399668"
+        },
+        {
+            firstName:"Susena",
+            lastName:"Ashenafi",
+            trafficID:"446321",
+            stationedAt:"Mexico",
+            Nationality:"Ethiopian",
+            Sex:"Female",
+            Tel:"0911346744"
+        }]);
     }
     catch(err){
         console.log(err);
@@ -23,7 +62,9 @@ async function main(){
     }
 }
 main().catch(console.error);
-async function createListing(client, newListing){
-    const result=await client.db('Pen').collection('Traffic Info').insertOne(newListing);
-    console.log(`new listing created created with the following id: ${result.insertId}`);
+async function createMultipleListings(client, newListings){
+    const result = await client.db("Pen").collection("Traffic Info").insertMany(newListings);
+
+    console.log(`${result.insertedCount} new listing(s) created with the following id(s):`);
+    console.log(result.insertedIds);       
 };
